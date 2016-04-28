@@ -152,7 +152,7 @@ angular.module('ngCart', ['ngCart.directives'])
             
             $rootScope.$broadcast('ngCart:change', {});
             this.$cart.items = [];
-            $window.localStorage.removeItem('cart');
+            $window.sessionStorage.removeItem('cart');
         };
         
         this.isEmpty = function () {
@@ -307,8 +307,8 @@ angular.module('ngCart', ['ngCart.directives'])
         return {
 
             get: function (key) {
-                if ( $window.localStorage.getItem(key) )  {
-                    var cart = angular.fromJson( $window.localStorage.getItem(key) ) ;
+                if ( $window.sessionStorage.getItem(key) )  {
+                    var cart = angular.fromJson( $window.sessionStorage.getItem(key) ) ;
                     return JSON.parse(cart);
                 }
                 return false;
@@ -319,11 +319,11 @@ angular.module('ngCart', ['ngCart.directives'])
             set: function (key, val) {
 
                 if (val === undefined) {
-                    $window.localStorage.removeItem(key);
+                    $window.sessionStorage.removeItem(key);
                 } else {
-                    $window.localStorage.setItem( key, angular.toJson(val) );
+                    $window.sessionStorage.setItem( key, angular.toJson(val) );
                 }
-                return $window.localStorage.getItem(key);
+                return $window.sessionStorage.getItem(key);
             }
         }
     }])
